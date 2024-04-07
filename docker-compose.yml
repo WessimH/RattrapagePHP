@@ -1,46 +1,40 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
+  web:
+    image: php:7.4-apache
+    container_name: php_web
+    volumes:
+      - ./www:/var/www/html
+    ports:
+      - "80:80"
     depends_on:
       - db
-    volumes:
-      - ./www:/var/www/html  # Mount your project directory
-    ports:
-      - "8080:80"
-    environment:
-      MYSQL_HOST: db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: example
-      MYSQL_DB: mydatabase
-    networks:
-      - app-network
 
   db:
-    image: mysql
+    image: mysql:5.7
+    container_name: mysql_db
     volumes:
       - db_data:/var/lib/mysql
+      - ./backup.sql:/docker-entrypoint-initdb.d/backup.sql
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydatabase
-    networks:
-      - app-network
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
     ports:
       - "3306:3306"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: php_myadmin
     environment:
       PMA_HOST: db
-      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: rootpassword
     ports:
-      - "8081:80"
+      - "8080:80"
     depends_on:
       - db
-networks:
-  app-network:
-    driver: bridge
 
 volumes:
   db_data:
