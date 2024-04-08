@@ -18,12 +18,6 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install mysqli pdo pdo_mysql && \
     docker-php-ext-enable mysqli pdo pdo_mysql
 
-# Set the COMPOSER_ALLOW_SUPERUSER environment variable
-ENV COMPOSER_ALLOW_SUPERUSER=1
-
-# Install Composer globally
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-
 # Ensure the /var/www/html/ directory exists
 RUN mkdir -p /var/www/html/
 
@@ -32,9 +26,6 @@ COPY www/ /var/www/html/
 
 # Set the working directory to your project's directory
 WORKDIR /var/www/html
-RUN composer install
-# Use Composer to install project dependencies, including Faker
-RUN composer require fakerphp/faker
 
 # Fix permissions for the project directory
 RUN chown -R www-data:www-data /var/www/html && \

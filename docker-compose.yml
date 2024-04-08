@@ -8,9 +8,6 @@ services:
       - ./www:/var/www/html
     ports:
       - "8000:80"
-    build:
-        context: .
-        dockerfile: Dockerfile
     depends_on:
       - db
 
