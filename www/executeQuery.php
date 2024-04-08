@@ -1,11 +1,13 @@
 <?php
+// Function to execute a SQL query with optional parameters
+
 function executeQuery($query, $params = [])
 {
     // Database configuration
-    $dbHost = 'localhost'; // Changed from '127.0.0.1'
+    $dbHost = 'db'; // Changed from '127.0.0.1'
     $dbName = 'mydatabase';
     $dbUser = 'root';
-    $dbPass = 'my-secret-pw';
+    $dbPass = 'rootpassword';
     // Attempt to connect and execute the query
     try {
         // Create a new PDO instance with error handling mode

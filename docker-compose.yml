@@ -7,21 +7,29 @@ services:
     volumes:
       - ./www:/var/www/html
     ports:
-      - "80:80"
+      - "8000:80"
+    build:
+        context: .
+        dockerfile: Dockerfile
     depends_on:
       - db
 
   db:
     image: mysql:5.7
     container_name: mysql_db
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
     volumes:
       - db_data:/var/lib/mysql
-      - ./backup.sql:/docker-entrypoint-initdb.d/backup.sql
+      - ./schema.sql:/docker-entrypoint-initdb.d/1.sql
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: mydatabase
       MYSQL_USER: user
       MYSQL_PASSWORD: userpassword
+      LANG=C: UTF-8
     ports:
       - "3306:3306"
 
