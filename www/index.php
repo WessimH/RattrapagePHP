@@ -1,4 +1,4 @@
 <?php
-
 require_once 'executeQuery.php';
-var_dump(executeQuery("SELECT * FROM Clients"));
+echo '<h1>PHP MySQL Docker Example</h1>';
+

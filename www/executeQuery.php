@@ -1,20 +1,18 @@
 <?php
-// Function to execute a SQL query with optional parameters
-
 function executeQuery($query, $params = [])
 {
     // Database configuration
-    $dbHost = 'db'; // Changed from '127.0.0.1'
+    $dbHost = 'db';
     $dbName = 'mydatabase';
     $dbUser = 'root';
     $dbPass = 'rootpassword';
-    // Attempt to connect and execute the query
+
     try {
-        // Create a new PDO instance with error handling mode
-        $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8", $dbUser, $dbPass, [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ]);
+        // Create a new PDO instance
+        $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8", $dbUser, $dbPass);
+
+        // Set the PDO error mode to exception
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare the SQL statement
         $stmt = $pdo->prepare($query);
@@ -24,17 +22,17 @@ function executeQuery($query, $params = [])
 
         // Check if the query is a SELECT statement
         if (stripos($query, 'SELECT') === 0) {
-            // Return the results for SELECT queries
-            return $stmt->fetchAll();
+            // Fetch all results and return them
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
-            // For other types of queries, return the number of affected rows
+            // Return the number of affected rows
             return $stmt->rowCount();
         }
     } catch (PDOException $e) {
-        // Log error message to error log in PHP
-        error_log("Error: " . $e->getMessage());
+        // Log the error message
+        error_log("Database query error: " . $e->getMessage());
 
-        // Return a custom error object or message for the caller to handle
+        // Return an error message
         return [
             'error' => true,
             'message' => "Database query error: " . $e->getMessage()

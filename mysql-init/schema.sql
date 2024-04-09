@@ -59,3 +59,25 @@ CREATE TABLE Intervention_Equipment (
                                         FOREIGN KEY (InterventionID) REFERENCES Interventions(InterventionID),
                                         FOREIGN KEY (EquipmentID) REFERENCES Equipment(EquipmentID)
 );
+
+INSERT INTO Clients (LastName, FirstName, Email, PhoneNumber, Address) VALUES
+                                                                           ('Smith', 'John', 'john.smith@example.com', '123-456-7890', '123 Elm St, Springfield'),
+                                                                           ('Doe', 'Jane', 'jane.doe@example.com', '321-654-0987', '456 Oak St, Anytown'),
+                                                                           ('Johnson', 'Emily', 'emily.johnson@example.com', '231-564-8970', '789 Pine St, Metropolis'),
+                                                                           ('Brown', 'Michael', 'michael.brown@example.com', '312-645-0789', '101 Maple St, Gotham');
+INSERT INTO Vehicles (VehicleID, Brand, Model) VALUES
+                                                   ('VH001', 'Toyota', 'Camry'),
+                                                   ('VH002', 'Honda', 'Civic'),
+                                                   ('VH003', 'Ford', 'Fiesta'),
+                                                   ('VH004', 'Tesla', 'Model 3');
+INSERT INTO Equipment (Label, Brand, Model, SerialNumber) VALUES
+                                                              ('Laptop', 'Dell', 'XPS 15', 'SN001'),
+                                                              ('Drill', 'Bosch', 'Professional', 'SN002'),
+                                                              ('Multimeter', 'Fluke', '87V', 'SN003'),
+                                                              ('Wrench Set', 'Craftsman', 'Standard', 'SN004');
+INSERT INTO Interventions (EmployeeID, ClientID, VehicleID, Date, Comment) VALUES
+                                                                               (1, 1, 'VH001', '2024-04-10 10:00:00', 'Regular maintenance'),
+                                                                               (2, 2, 'VH002', '2024-04-11 11:00:00', 'Oil change'),
+                                                                               (3, 3, 'VH003', '2024-04-12 09:30:00', 'Brake inspection'),
+                                                                               (4, 4, 'VH004', '2024-04-13 14:00:00', 'Battery replacement');
+
