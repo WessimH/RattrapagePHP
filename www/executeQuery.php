@@ -2,15 +2,15 @@
 function executeQuery($query, $params = [])
 {
     // Database configuration
-    $dbHost = 'db';
+    $dbHost = 'localhost';
+    $dbPort = '3307';
     $dbName = 'mydatabase';
-    $dbUser = 'root';
-    $dbPass = 'rootpassword';
+    $dbUser = 'Wessim';
+    $dbPass = '';
 
     try {
         // Create a new PDO instance
-        $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8", $dbUser, $dbPass);
-
+        $pdo = new PDO("mysql:host=$dbHost;port=$dbPort;dbname=$dbName;charset=utf8", $dbUser, $dbPass);
         // Set the PDO error mode to exception
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
