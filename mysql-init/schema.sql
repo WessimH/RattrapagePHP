@@ -15,11 +15,11 @@ CREATE TABLE Clients (
 );
 
 -- Creation of the Employees table
-CREATE TABLE Employees (
-                           EmployeeID INT AUTO_INCREMENT PRIMARY KEY,
-                           LastName VARCHAR(255) NOT NULL,
-                           FirstName VARCHAR(255) NOT NULL
-);
+INSERT INTO Employees (LastName, FirstName) VALUES
+('Employee1', 'Lastname1'),
+('Employee2', 'Lastname2'),
+('Employee3', 'Lastname3'),
+('Employee4', 'Lastname4');
 
 -- Creation of the Vehicles table
 CREATE TABLE Vehicles (
