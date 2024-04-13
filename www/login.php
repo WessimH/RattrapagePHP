@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container">
-    <h2 class="mt-5">Login Page</h2>
+    <h2 class="mt-5">Login Zoe</h2>
     <form action="authenticate.php" method="post" class="mt-3">
         <div class="form-group">
             <label for="lastName">Last Name:</label>
