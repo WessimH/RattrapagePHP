@@ -33,7 +33,7 @@ if ($user && $enteredPassword == $user['password']) {
     // Start a new session and set the user name
     session_start();
     $_SESSION['employeeName'] = $user['FirstName']; // Assuming 'FirstName' is the column name in your database
-
+    $_SESSION['employee_id'] = $user['EmployeeID'];
     // Redirect to the index page
     header("Location: index.php");
     exit;
